@@ -1,9 +1,11 @@
 import inquirer from 'inquirer';
-//import fs from 'fs'; 
+import fs from 'fs'; 
 import Manager from './lib/Manager.js'
 import Engineer from './lib/Engineer.js';
 import Intern from './lib/Intern.js';
-import Employee from './lib/employee.js';
+//import Employee from './lib/employee.js';
+
+const renderTeam=require('./lib/html-templates.js');
 
 const teamMemberObjArr = []
 
@@ -22,8 +24,10 @@ const mainMenu = () => {
             askEngineer()
         } else if (Direction==='Intern') {
             askIntern()
-        }else {
+        }else if (Direction==='Build Team') {
             buildTeam()
+        }else {
+            console.log('Done')
         }
         
     }); 
@@ -86,7 +90,6 @@ const askEngineer = () => {
     mainMenu()
 })
 } 
-//mainMenu()
 
 const askIntern = () => {
     inquirer.prompt([{
@@ -113,11 +116,14 @@ const askIntern = () => {
     console.log(intern);
     teamMemberObjArr.push(intern)
     mainMenu()
-})
+});
+
+const buildTeam = () => {
+    fs.writeFile("./dist/index/html", renderTeam(teamMemberObjArr), 'utf-8')
+}
+
+
 } 
 mainMenu()
 
 
-const buildTeam = () => {
-
-}
