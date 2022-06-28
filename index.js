@@ -5,7 +5,7 @@ import Engineer from './lib/Engineer.js';
 import Intern from './lib/Intern.js';
 //import Employee from './lib/employee.js';
 
-const renderTeam=require('./lib/html-templates.js');
+import renderTeam from './lib/html-templates.js';
 
 const teamMemberObjArr = []
 
@@ -117,13 +117,13 @@ const askIntern = () => {
     teamMemberObjArr.push(intern)
     mainMenu()
 });
-
+} 
 const buildTeam = () => {
-    fs.writeFile("./dist/index/html", renderTeam(teamMemberObjArr), 'utf-8')
+    fs.writeFileSync("./dist/index.html", renderTeam(teamMemberObjArr))
 }
 
 
-} 
+
 mainMenu()
 
 
